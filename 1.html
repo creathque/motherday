@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>母亲节快乐</title>
+  <style>
+    /* 页面背景及容器重置 */
+    body {
+      background-color: pink;
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+    }
+    /* 中心大爱心 */
+    .big-heart {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+    .big-heart::before,
+    .big-heart::after {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      border-radius: 50%;
+    }
+    .big-heart::before {
+      top: -100px;
+      left: 0;
+    }
+    .big-heart::after {
+      left: 100px;
+      top: 0;
+    }
+    /* 中心文字 */
+    .message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2.5em;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      margin: 0;
+    }
+    /* 小爱心样式 */
+    .heart {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      transform: rotate(-45deg);
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -15px;
+      left: 0;
+    }
+    .heart::after {
+      left: 15px;
+      top: 0;
+    }
+    /* 下落动画 */
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(120vh); }
+    }
+  </style>
+</head>
+<body>
+  <!-- 中心大爱心和文字 -->
+  <div class="big-heart"></div>
+  <div class="message">母亲节快乐</div>
+
+  <!-- 生成并下落小爱心的脚本 -->
+  <script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      // 随机水平位置
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = '-50px';
+      // 随机动画时长
+      const duration = 5 + Math.random() * 5;
+      heart.style.animation = `fall ${duration}s linear`;
+      document.body.appendChild(heart);
+      // 动画结束后移除元素
+      setTimeout(() => heart.remove(), (duration + 1) * 1000);
+    }
+    // 每0.5秒生成一个新爱心
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
